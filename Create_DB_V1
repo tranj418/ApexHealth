@@ -1,0 +1,78 @@
+-- drop database if exists apex_health;
+
+create database if not exists apex_health;
+use apex_health;
+
+drop table if exists appointments; -- has two other keys it relies on (patientID / physicianID) so this has to be dropped first
+drop table if exists payments; -- has to be deleted before billing since it has a FK from the billing table
+drop table if exists billing; -- has to be deleted before patients, since it has a FK from the patients table
+drop table if exists patients;
+drop table if exists physicians;
+
+
+create table physicians
+(
+	physicianID int auto_increment not null,
+    firstName varchar(60) not null,
+    lastName varchar(60) not null,
+    phone varchar(20),
+    email varchar(60),
+    specialization varchar(60),
+    
+    CONSTRAINT physicianPK PRIMARY KEY (physicianid) 
+);
+
+
+create table patients
+(
+	patientID int auto_increment not null,
+    firstName varchar(60) not null,
+    lastName varchar(60) not null,
+    birthdate date not null,
+    phone varchar(20),
+    email varchar(60),
+    sex char(1) not null,
+    race varchar(20) not null,
+    insuranceProviderID varchar(20) not null,
+    registrationDate date not null,
+    
+    CONSTRAINT patientPK PRIMARY KEY (patientid) 
+);
+
+create table appointments
+(
+	apptID int auto_increment not null,
+	patientID int not null,
+    physicianID int not null,
+    apptDate date not null,
+    apptReason varchar(100) not null,
+    
+    constraint apptPK primary key (apptID),
+    constraint patientFK foreign key(patientID) references patients (patientID),
+    constraint physicianFK foreign key(physicianID) references physicians (physicianID)
+);
+
+create table billing
+(
+	billingID int auto_increment not null,
+    patientID int not null,
+    issueDate date not null,
+    dueDate date not null,
+    amountDue decimal(5, 2) not null,
+    insuranceCoverage decimal(5, 2) not null,
+    
+    constraint billigFK primary key(billingID),
+    constraint patientFK_ foreign key (patientID) references patients (patientID)
+);
+
+create table payments
+(
+	billingID int auto_increment not null,
+    paymentDate date not null,
+    paymentAmt decimal(5, 2) not null,
+    
+    constraint billFK foreign key(billingID) references billing (billingID)
+);
+
+
+
