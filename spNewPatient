@@ -1,0 +1,23 @@
+delimiter $$
+
+create procedure spNewPatient
+(
+	_firstName varchar(60),
+    _lastName varchar(60),
+    _birthdate date,
+    _phone varchar(20),
+    _email varchar(60),
+    _sex varchar(20),
+    _race varchar(20),
+    _insuranceProviderID varchar(20),
+    _registrationDate date
+)
+
+begin
+
+insert into patients(firstName, lastName, birthdate, phone, email, sex, race, insuranceProviderID, registrationDate)
+values(_firstName, _lastName, _birthdate, _phone, _email, _sex, _race, _insuranceProviderID, _registrationDate);
+
+end $$
+
+delimiter ;
