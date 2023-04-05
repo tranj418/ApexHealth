@@ -1,0 +1,21 @@
+delimiter $$
+
+create procedure spNewPhys
+(
+
+	_firstName varchar(60),
+    _lastName varchar(60),
+    _phone varchar(20),
+    _email varchar(60),
+    _specialization varchar(60)
+
+)
+
+begin
+
+insert into physicians(firstName, lastName, phone, email, specialization)
+values(_firstName, _lastName, _phone, _email, _specialization);
+
+end $$
+
+delimiter ;
