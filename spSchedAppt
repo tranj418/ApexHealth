@@ -1,0 +1,18 @@
+delimiter $$
+
+create procedure spSchedAppt
+(
+  _patientID int,
+  _physicianID int,
+  _apptDate date,
+  _apptReason Varchar(100)
+)
+
+begin
+
+insert into appointments(patientID, physicianID, apptDate, apptReason)
+values(_patientID, _physicianID, _apptDate, _apptReason);
+
+end $$
+
+delimiter ;
