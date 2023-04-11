@@ -15,7 +15,7 @@ create procedure spNewPatient
 begin
 
 insert into patients(firstName, lastName, birthdate, phone, email, sex, race, registrationDate)
-values(_firstName, _lastName, _birthdate, _phone, _email, _sex, _race, _registrationDate);
+values(_firstName, _lastName, _birthdate, _phone, _email, _sex, _race, CURDATE());
 
 end $$
 
