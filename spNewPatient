@@ -9,14 +9,13 @@ create procedure spNewPatient
     _email varchar(60),
     _sex varchar(20),
     _race varchar(20),
-    _insuranceProviderID varchar(20),
     _registrationDate date
 )
 
 begin
 
-insert into patients(firstName, lastName, birthdate, phone, email, sex, race, insuranceProviderID, registrationDate)
-values(_firstName, _lastName, _birthdate, _phone, _email, _sex, _race, _insuranceProviderID, _registrationDate);
+insert into patients(firstName, lastName, birthdate, phone, email, sex, race, registrationDate)
+values(_firstName, _lastName, _birthdate, _phone, _email, _sex, _race, _registrationDate);
 
 end $$
 
