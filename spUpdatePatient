@@ -1,0 +1,22 @@
+delimiter $$
+
+create procedure spUpdatePatient
+(
+	_patientID int,
+    _firstName varchar(60),
+    _lastName varchar(60),
+    _birthdate date,
+    _phone varchar(20),
+    _email varchar(60),
+    _sex varchar(20),
+    _race varchar(20)
+)
+
+begin
+UPDATE patients
+SET firstName = _firstName, lastName = _lastName, birthdate = _birthdate, phone = _phone, email = _email, sex = _sex, race = _race
+WHERE patientID = _patientID;
+
+end $$
+
+delimiter ;
