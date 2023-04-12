@@ -1,0 +1,13 @@
+delimiter $$
+
+create procedure spDeletePatient
+(
+	_patientID int
+)
+
+begin
+	delete from patients
+    where patientID = _patientID;
+end $$
+
+delimiter ;
