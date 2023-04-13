@@ -1,0 +1,37 @@
+delimiter $$
+
+create procedure spUpdateAppt
+(
+	-- This proc should only be getting executed in the code, not in the MySQL itself. 
+    -- Mainly because if you do not enter in the right patient or physician ID here, then it will affect all other rows.
+	_patientID int, -- grab the value from the row selected in the appt view window for the WHERE clause
+	patient_firstName varchar(60),
+    patient_lastName varchar(60),
+    
+    _physicianID int, -- grab the value from the row selected in the appt view window for the WHERE clause
+    physician_firstName varchar(60),
+    physician_lastName varchar(60),
+    
+    _apptID int,
+    _apptDate date,
+    _apptReason varchar(200)
+)
+
+begin
+
+update patients
+set firstName = patient_firstName, lastName = patient_lastName
+where patientID = _patientID;
+
+update physicians
+set firstName = physician_firstName, lastName = physician_lastName
+where physicianID = _physicianID;
+
+update appointments
+set apptDate = _apptDate, apptReason = _apptReason
+where apptID = _apptID;
+
+end $$
+
+delimiter ;
+
