@@ -1,0 +1,20 @@
+create view sqvApptView as
+(
+select 
+	   apptID
+    ,patientID
+    ,pa.firstName as "Patient First Name"
+    ,pa.lastName as "Patient Last Name"
+    -- ,concat(pa.firstName, " ", pa.lastName) as "Patient Name" -- temporarily removing to see if that will work with the appt view form
+    ,physicianID
+    ,ph.firstName as "Physician First Name"
+    ,ph.lastName as "Physician Last Name"
+    -- ,concat(ph.firstName, " ", ph.lastName) as "Assigned Physician"
+    ,apptDate as "Appointment Date"
+    ,apptReason as "Appointment Reason"
+from appointments
+join patients pa
+using(patientID)
+join physicians ph
+using(physicianID)
+)
