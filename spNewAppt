@@ -1,0 +1,27 @@
+delimiter $$
+
+create procedure spNewAppt
+(
+
+	_firstName varchar(60),
+	_lastName varchar(60),
+    _email varchar(60),
+    ph_firstName varchar(60),
+    ph_lastName varchar(60),
+    ph_email varchar(60),
+    _apptDate date,
+    _apptReason varchar(200)
+)
+
+begin
+
+	insert into appointments(patientID, physicianID, apptDate, apptReason)
+    values(
+		(select patientID from patients where firstName = _firstName and lastName = _lastName and email = _email),
+        (select physicianID from physicians where firstName = ph_firstName and lastName = ph_lastName and email = ph_email),
+        _apptDate,
+        _apptReason
+		);
+end $$
+
+delimiter ;
