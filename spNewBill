@@ -1,0 +1,21 @@
+-- call apex_health.spNewBill(1, 1, curdate(), adddate(curdate(), 30), 100);
+-- example of how the proc was called successfully in SQL, the second date arg passed is for the due date.
+-- this could be handled better in code?
+
+delimiter $$
+
+create procedure spNewBill
+(
+	_patientID int,
+    _apptID int,
+    _issueDate date,
+    _dueDate date,
+    _amountDue decimal(5,2)
+)
+
+begin
+	insert into billing(patientID, apptID, issueDate, dueDate, amountDue)
+    values(_patientID, _apptID, _issueDate, _dueDate, _amountDue);
+end $$
+
+delimiter ;
