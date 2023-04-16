@@ -1,0 +1,23 @@
+-- doing a test and wrapping this view in a subquery in the from clause
+-- as opposed to the other one, spvpatientappt
+
+create view spvPatientBilling as 
+(
+select * from
+(
+select
+	 b.billingID
+    ,p.patientID
+    ,p.firstName
+    ,p.lastName
+    ,b.issueDate
+    ,b.dueDate
+    ,b.amountDue
+    ,a.apptReason
+from billing b
+join patients p
+using(patientID)
+join appointments a
+using(apptID)
+) as a
+)
