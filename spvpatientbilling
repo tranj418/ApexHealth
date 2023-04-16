@@ -1,5 +1,4 @@
 -- doing a test and wrapping this view in a subquery in the from clause
--- as opposed to the other one, spvpatientappt
 
 create view spvPatientBilling as 
 (
@@ -8,6 +7,7 @@ select * from
 select
 	 b.billingID
     ,p.patientID
+    ,b.apptID
     ,p.firstName
     ,p.lastName
     ,b.issueDate
