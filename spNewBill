@@ -15,7 +15,7 @@ create procedure spNewBill
 
 begin
 	insert into billing(patientID, apptID, issueDate, dueDate, amountDue)
-    values(_patientID, _apptID, _issueDate, _dueDate, _amountDue);
+    values(_patientID, _apptID, _issueDate, adddate(_dueDate, 30), _amountDue);
 end $$
 
 delimiter ;
