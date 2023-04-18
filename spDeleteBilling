@@ -1,0 +1,16 @@
+delimiter $$
+
+create procedure spDeletebilling
+(
+	_billingID int,
+    _patientID int,
+    _apptID int
+)
+
+begin
+	delete from billing
+    where billingID = _billingID and patientID = _patientID and apptID = _apptID;
+    
+end $$
+
+delimiter ;
