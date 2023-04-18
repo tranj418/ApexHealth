@@ -1,0 +1,35 @@
+-- ID parameters ARE required, the fields on the form are disabled so that users cannot actively clear them out.
+-- they are needed for the where clauses in the update statements
+-- otherwise everything will update within the corresponding table
+
+delimiter $$
+
+create procedure spUpdateBilling
+(
+	_apptID int,
+    _patientID int,
+    _firstName varchar(60),
+    _lastName varchar(60),
+    _issueDate date,
+    _dueDate date,
+    _amountDue decimal(5,2),
+    _apptReason varchar(200)
+)
+
+begin 
+
+	update patients
+    set firstName = _firstName, lastName = _lastName
+    where patientID = _patientID;
+    
+    update billing
+    set issueDate = _IssueDate, dueDate = _dueDate, amountDue = _amountDue
+    where patientID = _patientID and apptID = _apptID;
+    
+    update appointments
+    set apptReason = _apptReason
+    where apptID = _apptID and patientID = _patientID;
+    
+end $$
+
+delimiter ;
